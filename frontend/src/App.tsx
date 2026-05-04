@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Camera, BookOpen, Sparkles, Image as ImageIcon, ChevronRight, User, History, Palette, Download, CheckCircle2 } from 'lucide-react';
-import { jsPDF } from 'jspdf';
+import { Camera, BookOpen, Sparkles, Image as ImageIcon, ChevronRight, User, History, Palette, CheckCircle2 } from 'lucide-react';
 
 type Step = 1 | 2 | 3 | 4;
 

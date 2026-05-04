@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Lock, Download, CheckCircle2, Search, X } from 'lucide-react';
+import { useState } from 'react';
+import { Lock, Download, X } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 
 const API_URL = import.meta.env.DEV ? 'http://localhost:5001' : '';
