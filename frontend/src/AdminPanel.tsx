@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Lock, Download, X } from 'lucide-react';
 import { jsPDF } from 'jspdf';
+import JSZip from 'jszip';
 
 const API_URL = import.meta.env.DEV ? 'http://localhost:5001' : '';
 
@@ -182,24 +183,29 @@ Para CADA escena o panel en el guion, debes generar un bloque llamado **[Midjour
       return;
     }
 
-    for (let i = 0; i < urls.length; i++) {
-      try {
+    try {
+      const zip = new JSZip();
+      
+      for (let i = 0; i < urls.length; i++) {
         const response = await fetch(`${API_URL}${urls[i]}`);
         const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
         const ext = urls[i].split('.').pop() || 'jpg';
-        a.download = `${order.codigo_pago}_RAW_${i + 1}.${ext}`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        // Pequeña pausa para no saturar al navegador
-        await new Promise(r => setTimeout(r, 600));
-      } catch (err) {
-        console.error("Error al descargar foto", err);
+        const filename = `${order.codigo_pago}_RAW_${i + 1}.${ext}`;
+        zip.file(filename, blob);
       }
+      
+      const zipContent = await zip.generateAsync({ type: 'blob' });
+      const zipUrl = URL.createObjectURL(zipContent);
+      const a = document.createElement('a');
+      a.href = zipUrl;
+      a.download = `${order.codigo_pago}_FotosRAW.zip`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(zipUrl);
+    } catch (err) {
+      console.error("Error al descargar fotos", err);
+      alert("Hubo un error al generar el archivo ZIP de las fotos.");
     }
   };
 
