@@ -505,18 +505,7 @@ function Step3({ state, setState, onGenerate, isSubmitting, onBack }: any) {
           ))}
         </div>
 
-        <div className="bg-purple-900/20 border border-purple-500/30 rounded-2xl p-6 flex items-start gap-4 mb-8">
-          <div className="bg-purple-600/20 p-3 rounded-xl shrink-0">
-            <Sparkles className="w-6 h-6 text-purple-400" />
-          </div>
-          <div>
-            <h4 className="font-bold text-white mb-1">¡Todo Listo para NotebookLM!</h4>
-            <p className="text-sm text-neutral-400">
-              Al generar el proyecto, crearemos un "Dossier de Personaje" en formato de documento (Markdown/Texto). 
-              Este formato es perfecto para subir directamente a NotebookLM para que escriba el guion estructurado.
-            </p>
-          </div>
-        </div>
+
 
         <div className="mt-10 flex justify-between">
           <button onClick={onBack} className="text-neutral-400 hover:text-white px-6 py-3 rounded-xl font-medium transition-colors">
