@@ -332,9 +332,11 @@ function Step2({ state, setState, onNext, onBack }: any) {
   const [uploadingIdx, setUploadingIdx] = useState<number | null>(null);
 
   const updateHito = (index: number, field: string, value: string) => {
-    const newHitos = [...state];
-    newHitos[index] = { ...newHitos[index], [field]: value };
-    setState(newHitos);
+    setState((prevHitos: any[]) => {
+      const newHitos = [...prevHitos];
+      newHitos[index] = { ...newHitos[index], [field]: value };
+      return newHitos;
+    });
   };
 
   const handlePhotoUpload = async (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
