@@ -464,10 +464,10 @@ function Step2({ state, setState, onNext, onBack }: any) {
 
 function Step3({ state, setState, onGenerate, isSubmitting, onBack }: any) {
   const styles = [
-    { id: 'cinematic', name: 'Cinematic', desc: 'Realismo épico e iluminación dramática', bg: 'bg-gradient-to-br from-blue-900 to-black', border: 'border-blue-500' },
-    { id: 'comic', name: 'Comic Book', desc: 'Estilo clásico con colores vibrantes y tintas', bg: 'bg-gradient-to-br from-red-600 to-yellow-500', border: 'border-yellow-400' },
-    { id: 'manga', name: 'Manga', desc: 'Blanco y negro con tramas dinámicas', bg: 'bg-gradient-to-br from-neutral-700 to-neutral-950', border: 'border-white' },
-    { id: 'noir', name: 'Noir', desc: 'Contraste alto, sombras duras y misterio', bg: 'bg-gradient-to-br from-zinc-900 to-black', border: 'border-zinc-500' }
+    { id: 'cinematic', name: 'Cinematic', desc: 'Realismo épico e iluminación dramática', bg: 'bg-gradient-to-br from-blue-900 to-black', border: 'border-blue-500', image: '/styles/cinematic.png' },
+    { id: 'comic', name: 'Comic Book', desc: 'Estilo clásico con colores vibrantes y tintas', bg: 'bg-gradient-to-br from-red-600 to-yellow-500', border: 'border-yellow-400', image: '/styles/comic.png' },
+    { id: 'manga', name: 'Manga', desc: 'Blanco y negro con tramas dinámicas', bg: 'bg-gradient-to-br from-neutral-700 to-neutral-950', border: 'border-white', image: '/styles/manga.png' },
+    { id: 'noir', name: 'Noir', desc: 'Contraste alto, sombras duras y misterio', bg: 'bg-gradient-to-br from-zinc-900 to-black', border: 'border-zinc-500', image: '/styles/noir.png' }
   ];
 
   return (
@@ -485,8 +485,12 @@ function Step3({ state, setState, onGenerate, isSubmitting, onBack }: any) {
               onClick={() => setState(style.id)}
               className={`relative overflow-hidden rounded-2xl cursor-pointer group transition-all duration-300 ${state === style.id ? `ring-2 ring-offset-4 ring-offset-neutral-900 ring-${style.border.split('-')[1]}-500 scale-105 shadow-xl` : 'hover:scale-105 border border-neutral-800 hover:border-neutral-700'}`}
             >
-              <div className={`h-40 ${style.bg} opacity-80 group-hover:opacity-100 transition-opacity flex items-center justify-center`}>
-                <ImageIcon className="w-12 h-12 text-white/50" />
+              <div className={`h-40 ${style.bg} opacity-80 group-hover:opacity-100 transition-opacity flex items-center justify-center relative`}>
+                {style.image ? (
+                  <img src={style.image} alt={style.name} className="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-500" />
+                ) : (
+                  <ImageIcon className="w-12 h-12 text-white/50" />
+                )}
               </div>
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent p-4 pt-12">
                 <h4 className="font-bold text-white mb-1">{style.name}</h4>
